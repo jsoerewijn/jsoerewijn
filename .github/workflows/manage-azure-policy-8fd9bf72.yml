@@ -1,0 +1,76 @@
+name: manage-azure-policy-8fd9bf72
+on:
+  workflow_dispatch:
+    inputs:
+      remarks:
+        description: 'Reason for triggering the workflow run'
+        required: false
+        default: 'Updating Azure Policies'
+
+
+## Uncomment the following if you wish to automatically trigger workflow run with every commit
+#
+#  push:
+#    paths:
+#      - 'policies/Audit_virtual_machines_without_disaster_recovery_configured_0015ea4d-51ff-4ce3-8d8c-f3f8f0179a56/**'
+#      - 'policies/Restrict_location_of_information_processing,_storage_and_services_0040d2e5-2779-170d-6a2c-1f5fca353335/**'
+#      - 'policies/Vulnerability_assessment_should_be_enabled_on_your_Synapse_workspaces_0049a6b3-a662-4f3e-8635-39cf44ace45a/**'
+#      - 'policies/Establish_parameters_for_searching_secret_authenticators_and_verifiers_0065241c-72e9-3b2c-556f-75de66332a94/**'
+#      - 'policies/SQL_Server_Integration_Services_integration_runtimes_on_Azure_Data_Factory_should_be_joined_to_a_virtual_network_0088bc63-6dee-4a9c-9d29-91cfdc848952/**'
+#      - 'policies/_Preview_Configure_VMSS_created_with_Shared_Image_Gallery_images_to_install_the_Guest_Attestation_extension_009259b0-12e8-42c9-94e7-7af86aa58d13/**'
+#      - 'policies/Private_endpoint_connections_on_Batch_accounts_should_be_enabled_009a0c92-f5b4-4776-9b66-4ed2b4775563/**'
+#      - 'policies/Integrate_risk_management_process_into_SDLC_00f12b6f-10d7-8117-9577-0f2b76488385/**'
+#      - 'policies/View_and_configure_system_diagnostic_data_0123edae-3567-a05a-9b05-b53ebe9d3e7e/**'
+#      - 'policies/Azure_Backup_should_be_enabled_for_Virtual_Machines_013e242c-8828-4970-87b3-ab247555486d/**'
+#      - 'policies/Implement_a_threat_awareness_program_015b4935-448a-8684-27c0-d13086356c33/**'
+#      - 'initiatives/NIST_SP_800-171_Rev._2_03055927-78bd-4236-86c0-f36125a10dc9/**'
+#      - 'initiatives/Audit_machines_with_insecure_password_security_settings_095e4ed9-c835-4ab6-9439-b5644362a06c/**'
+#      - 'initiatives/Deploy_Windows_Azure_Monitor_Agent_with_user-assigned_managed_identity-based_auth_and_associate_with_Data_Collection_Rule_0d1b56c6-6d1f-4a5d-8695-b15efbea6b49/**'
+#      - 'initiatives/IRS1075_September_2016_105e0327-6175-4eb2-9af4-1fba43bdb39d/**'
+#      - 'initiatives/Configure_Linux_machines_to_run_Azure_Monitor_Agent_and_associate_them_to_a_Data_Collection_Rule_118f04da-0375-44d1-84e3-0fd9e1849403/**'
+#      - 'initiatives/Deploy_prerequisites_to_enable_Guest_Configuration_policies_on_virtual_machines_12794019-7a00-42cf-95c2-882eed337cc8/**'
+#      - 'initiatives/CIS_Microsoft_Azure_Foundations_Benchmark_v1.1.0_1a5bb27d-173f-493e-9568-eb56638dde4d/**'
+#      - 'initiatives/NIST_SP_800-53_Rev._5_179d1daa-458f-4e47-8086-2a68d0d6c38f/**'
+#      - 'initiatives/Azure_Security_Benchmark_1f3afdf9-d0c9-4c3d-847f-89da613e70a8/**'
+#      - 'initiatives/_Preview_Enable_Azure_Monitor_for_VMSS_with_Azure_Monitoring_Agent(AMA)_1f9b0c83-b4fa-4585-a686-72b74aeabcfd/**'
+#      - 'initiatives/_Preview_Australian_Government_ISM_PROTECTED_27272c0b-c225-4cc3-b8b0-f2534b093077/**'
+#      - 'initiatives/_Preview_Configure_prerequisites_to_enable_Guest_Attestation_on_Trusted_Launch_enabled_VMs_281d9e47-d14d-4f05-b8eb-18f2c4a034ff/**'
+#      - .github/workflows/manage-azure-policy-8fd9bf72.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_8fd9bf72}}
+        allow-no-subscriptions: true
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          policies/Audit_virtual_machines_without_disaster_recovery_configured_0015ea4d-51ff-4ce3-8d8c-f3f8f0179a56/**
+          policies/Restrict_location_of_information_processing,_storage_and_services_0040d2e5-2779-170d-6a2c-1f5fca353335/**
+          policies/Vulnerability_assessment_should_be_enabled_on_your_Synapse_workspaces_0049a6b3-a662-4f3e-8635-39cf44ace45a/**
+          policies/Establish_parameters_for_searching_secret_authenticators_and_verifiers_0065241c-72e9-3b2c-556f-75de66332a94/**
+          policies/SQL_Server_Integration_Services_integration_runtimes_on_Azure_Data_Factory_should_be_joined_to_a_virtual_network_0088bc63-6dee-4a9c-9d29-91cfdc848952/**
+          policies/_Preview_Configure_VMSS_created_with_Shared_Image_Gallery_images_to_install_the_Guest_Attestation_extension_009259b0-12e8-42c9-94e7-7af86aa58d13/**
+          policies/Private_endpoint_connections_on_Batch_accounts_should_be_enabled_009a0c92-f5b4-4776-9b66-4ed2b4775563/**
+          policies/Integrate_risk_management_process_into_SDLC_00f12b6f-10d7-8117-9577-0f2b76488385/**
+          policies/View_and_configure_system_diagnostic_data_0123edae-3567-a05a-9b05-b53ebe9d3e7e/**
+          policies/Azure_Backup_should_be_enabled_for_Virtual_Machines_013e242c-8828-4970-87b3-ab247555486d/**
+          policies/Implement_a_threat_awareness_program_015b4935-448a-8684-27c0-d13086356c33/**
+          initiatives/NIST_SP_800-171_Rev._2_03055927-78bd-4236-86c0-f36125a10dc9/**
+          initiatives/Audit_machines_with_insecure_password_security_settings_095e4ed9-c835-4ab6-9439-b5644362a06c/**
+          initiatives/Deploy_Windows_Azure_Monitor_Agent_with_user-assigned_managed_identity-based_auth_and_associate_with_Data_Collection_Rule_0d1b56c6-6d1f-4a5d-8695-b15efbea6b49/**
+          initiatives/IRS1075_September_2016_105e0327-6175-4eb2-9af4-1fba43bdb39d/**
+          initiatives/Configure_Linux_machines_to_run_Azure_Monitor_Agent_and_associate_them_to_a_Data_Collection_Rule_118f04da-0375-44d1-84e3-0fd9e1849403/**
+          initiatives/Deploy_prerequisites_to_enable_Guest_Configuration_policies_on_virtual_machines_12794019-7a00-42cf-95c2-882eed337cc8/**
+          initiatives/CIS_Microsoft_Azure_Foundations_Benchmark_v1.1.0_1a5bb27d-173f-493e-9568-eb56638dde4d/**
+          initiatives/NIST_SP_800-53_Rev._5_179d1daa-458f-4e47-8086-2a68d0d6c38f/**
+          initiatives/Azure_Security_Benchmark_1f3afdf9-d0c9-4c3d-847f-89da613e70a8/**
+          initiatives/_Preview_Enable_Azure_Monitor_for_VMSS_with_Azure_Monitoring_Agent(AMA)_1f9b0c83-b4fa-4585-a686-72b74aeabcfd/**
+          initiatives/_Preview_Australian_Government_ISM_PROTECTED_27272c0b-c225-4cc3-b8b0-f2534b093077/**
+          initiatives/_Preview_Configure_prerequisites_to_enable_Guest_Attestation_on_Trusted_Launch_enabled_VMs_281d9e47-d14d-4f05-b8eb-18f2c4a034ff/**
